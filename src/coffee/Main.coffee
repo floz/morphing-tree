@@ -1,12 +1,14 @@
 class Main
 
-    _sceneHeight: null
-    _sceneVector: null
+    _tree: null
     _stats: null
 
     constructor: ->
-        @_sceneHeight = new SceneHeight()
-        @_sceneVector = new SceneVector()
+        engine.init document.getElementById "main"
+
+        @_tree = new Tree()
+        @_tree.position.y = 300
+        engine.scene.add @_tree
 
         @_stats = new Stats()
         @_stats.domElement.style.position = "absolute"
@@ -18,10 +20,9 @@ class Main
         @_update()
 
     _update: =>
-        @_sceneVector.update()
-        @_sceneHeight.update()
-
         @_stats.update()
+        engine.update()
+        @_tree.update()
 
         requestAnimationFrame @_update
         
